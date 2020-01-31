@@ -39,7 +39,15 @@ public class Game {
 		int number = price / LOTTO_PRICE;
 
 		for (int i = 0; i < number; i++) {
+			addLottos();
+		}
+	}
+
+	private void addLottos() {
+		try {
 			lottoRepository.addLotto(new Lotto(makeLotto()));
+		} catch (Exception e) {
+			addLottos();
 		}
 	}
 

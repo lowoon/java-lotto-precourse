@@ -15,4 +15,8 @@ public class Lotto {
     public String toString() {
         return String.valueOf(numbers);
     }
+
+    public boolean equals(Lotto lotto) {
+        return numbers.containsAll(lotto.numbers);
+    }
 }
