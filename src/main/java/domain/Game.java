@@ -3,7 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 import view.InputView;
 import view.OutputView;
@@ -11,32 +10,17 @@ import view.OutputView;
 public class Game {
 	private static final int LOTTO_PRICE = 1000;
 
-	private Scanner scanner = new Scanner(System.in);
 	private LottoRepository lottoRepository = new LottoRepository();
+	private WinningLotto winningLotto;
 
 	public void run() {
-		makeLottos(getPrice());
+		makeLottos(InputView.inputPrice());
 		OutputView.showBuyingResult(lottoRepository.getLottos());
+		winningLotto = new WinningLotto(InputView.inputWinningLotto(), InputView.inputBonusNumber());
 	}
 
-	private int getPrice() {
-		int price = 0;
-
-		try {
-			price = InputView.inputPrice(scanner.nextLine().trim());
-		} catch (NumberFormatException e) {
-			System.out.println("숫자가 아닙니다.");
-			getPrice();
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			getPrice();
-		}
-
-		return price;
-	}
-
-	private void makeLottos(int price) {
-		int number = price / LOTTO_PRICE;
+	private void makeLottos(Price price) {
+		int number = price.toInteger() / LOTTO_PRICE;
 
 		for (int i = 0; i < number; i++) {
 			addLottos();
@@ -53,7 +37,7 @@ public class Game {
 
 	private List<Integer> makeLotto() {
 		List<Integer> lotto = new ArrayList<Integer>();
-		List<Integer> lottoNumber = getLottoNumber();
+		List<Integer> lottoNumber = makeLottoNumber();
 
 		for (int i = 0; i < 6; i++) {
 			lotto.add(lottoNumber.get(i));
@@ -62,7 +46,7 @@ public class Game {
 		return lotto;
 	}
 
-	private List<Integer> getLottoNumber() {
+	private List<Integer> makeLottoNumber() {
 		List<Integer> lottoNumber = new ArrayList<Integer>();
 
 		for (int i = 1; i < 46; i++) {

@@ -7,7 +7,7 @@ public class LottoRepository {
 	private final List<Lotto> lottos;
 
 	public LottoRepository() {
-		lottos = new ArrayList<Lotto>();
+		this.lottos = new ArrayList<Lotto>();
 	}
 
 	public void addLotto(Lotto lotto) throws Exception {
