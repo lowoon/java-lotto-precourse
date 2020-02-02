@@ -1,11 +1,9 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class WinningLottoNumbers {
-	private static final int LOTTO_COUNT = 6;
-
 	private final Lotto winningLotto;
 
 	public WinningLottoNumbers(String input) {
@@ -14,15 +12,12 @@ public class WinningLottoNumbers {
 		}
 
 		String[] numbers = input.split(",", -1);
-		if (numbers.length != LOTTO_COUNT) {
-			throw new IllegalArgumentException(LOTTO_COUNT + "개의 숫자를 입력해야 합니다.");
-		}
 
 		this.winningLotto = new Lotto(makeWinningLotto(numbers));
 	}
 
-	private List<Integer> makeWinningLotto(String[] numbers) {
-		List<Integer> winningLotto = new ArrayList<Integer>();
+	private Set<Integer> makeWinningLotto(String[] numbers) {
+		Set<Integer> winningLotto = new HashSet<Integer>();
 
 		for (String number : numbers) {
 			winningLotto.add(checkNumber(number));
@@ -44,7 +39,7 @@ public class WinningLottoNumbers {
 		return number;
 	}
 
-	public List<Integer> toList() {
+	public Set<Integer> toList() {
 		return winningLotto.toList();
 	}
 }

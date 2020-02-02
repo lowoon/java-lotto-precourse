@@ -2,7 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import view.InputView;
 import view.OutputView;
@@ -41,8 +43,8 @@ public class Game {
 		}
 	}
 
-	private List<Integer> makeLotto() {
-		List<Integer> lotto = new ArrayList<Integer>();
+	private Set<Integer> makeLotto() {
+		Set<Integer> lotto = new HashSet<Integer>();
 		List<Integer> lottoNumber = makeLottoNumber();
 
 		for (int i = 0; i < 6; i++) {

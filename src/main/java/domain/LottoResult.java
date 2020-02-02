@@ -20,14 +20,14 @@ public class LottoResult {
 		return rank.toString() + result.get(rank) + "개";
 	}
 
-	public int getSum() {
+	public double getSum() {
 		int sum = 0;
 
 		sum += result.get(Rank.FIFTH) * Rank.FIFTH.getWinningMoney();
-		sum += result.get(Rank.FIFTH) * Rank.FOURTH.getWinningMoney();
-		sum += result.get(Rank.FIFTH) * Rank.THIRD.getWinningMoney();
-		sum += result.get(Rank.FIFTH) * Rank.SECOND.getWinningMoney();
-		sum += result.get(Rank.FIFTH) * Rank.FIRST.getWinningMoney();
+		sum += result.get(Rank.FOURTH) * Rank.FOURTH.getWinningMoney();
+		sum += result.get(Rank.THIRD) * Rank.THIRD.getWinningMoney();
+		sum += result.get(Rank.SECOND) * Rank.SECOND.getWinningMoney();
+		sum += result.get(Rank.FIRST) * Rank.FIRST.getWinningMoney();
 
 		return sum;
 	}

@@ -26,6 +26,7 @@ public class OutputView {
 	}
 
 	public static void showRatio(Price price, LottoResult lottoResult) {
-		System.out.println("총 수익률은 " + (lottoResult.getSum() - price.toInteger()) / price.toInteger() + "%입니다.");
+		int ratio = (int)((lottoResult.getSum() - price.toInteger()) / price.toInteger()) * 100;
+		System.out.printf("총 수익률은 %d%%입니다.\n", ratio);
 	}
 }
