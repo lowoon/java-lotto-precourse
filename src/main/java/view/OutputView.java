@@ -3,6 +3,9 @@ package view;
 import java.util.List;
 
 import domain.Lotto;
+import domain.LottoResult;
+import domain.Price;
+import domain.Rank;
 
 public class OutputView {
 	public static void showBuyingResult(List<Lotto> lottos) {
@@ -10,5 +13,19 @@ public class OutputView {
 		for (Lotto lotto : lottos) {
 			System.out.println(lotto);
 		}
+	}
+
+	public static void showWinningResult(LottoResult lottoResult) {
+		System.out.println("\n당첨 통계");
+		System.out.println("-------");
+		System.out.println(lottoResult.toString(Rank.FIFTH));
+		System.out.println(lottoResult.toString(Rank.FOURTH));
+		System.out.println(lottoResult.toString(Rank.THIRD));
+		System.out.println(lottoResult.toString(Rank.SECOND));
+		System.out.println(lottoResult.toString(Rank.FIRST));
+	}
+
+	public static void showRatio(Price price, LottoResult lottoResult) {
+		System.out.println("총 수익률은 " + (lottoResult.getSum() - price.toInteger()) / price.toInteger() + "%입니다.");
 	}
 }

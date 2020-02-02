@@ -39,17 +39,18 @@ public class InputView {
 		return winningLottoNumbers;
 	}
 
-	public static BonusNumber inputBonusNumber() {
+	public static BonusNumber inputBonusNumber(WinningLottoNumbers winningLottoNumbers) {
 		BonusNumber bonusNumber = null;
 		try {
 			System.out.println("보너스 볼을 입력 주세요.");
 			bonusNumber = new BonusNumber(scanner.nextLine().trim());
+			bonusNumber.isExistent(winningLottoNumbers);
 		} catch (NumberFormatException e) {
 			System.out.println("숫자가 아닙니다.");
-			inputBonusNumber();
+			inputBonusNumber(winningLottoNumbers);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			inputBonusNumber();
+			inputBonusNumber(winningLottoNumbers);
 		}
 		return bonusNumber;
 	}

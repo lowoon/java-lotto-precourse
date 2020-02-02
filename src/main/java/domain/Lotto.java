@@ -9,7 +9,9 @@ public class Lotto {
     public static final int MAXIMUM_NUMBER = 45;
     public static final int MINIMUM_NUMBER = 1;
 
-    private final List<Integer> numbers;
+    private List<Integer> numbers;
+
+    public Lotto() {};
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
@@ -21,5 +23,9 @@ public class Lotto {
 
     public boolean equals(Lotto lotto) {
         return numbers.containsAll(lotto.numbers);
+    }
+
+    public List<Integer> toList() {
+        return numbers;
     }
 }

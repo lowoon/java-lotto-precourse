@@ -43,4 +43,8 @@ public class WinningLottoNumbers {
 
 		return number;
 	}
+
+	public List<Integer> toList() {
+		return winningLotto.toList();
+	}
 }

@@ -16,4 +16,14 @@ public class BonusNumber {
 			throw new IllegalArgumentException(Lotto.MINIMUM_NUMBER + "보다 작은 숫자는 입력할 수 없습니다.");
 		}
 	}
+
+	public int toInteger() {
+		return bonusNumber;
+	}
+
+	public void isExistent(WinningLottoNumbers winningLottoNumbers) {
+		if (winningLottoNumbers.toList().stream().anyMatch(number -> number == bonusNumber)) {
+			throw new IllegalArgumentException("당첨 번호에 있는 번호입니다.");
+		}
+	}
 }

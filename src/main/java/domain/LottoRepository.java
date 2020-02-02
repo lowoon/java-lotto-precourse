@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoRepository {
-	private final List<Lotto> lottos;
+	private List<Lotto> lottos;
 
 	public LottoRepository() {
 		this.lottos = new ArrayList<Lotto>();
 	}
 
-	public void addLotto(Lotto lotto) throws Exception {
+	public void addLotto(Lotto lotto) {
 		if (isExistent(lotto)) {
-			throw new Exception();
+			throw new IllegalArgumentException();
 		}
 		lottos.add(lotto);
 	}
@@ -22,7 +22,7 @@ public class LottoRepository {
 			.anyMatch(compare -> compare.equals(lotto));
 	}
 
-	public List<Lotto> getLottos() {
+	public List<Lotto> toLottoList() {
 		return lottos;
 	}
 }

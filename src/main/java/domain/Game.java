@@ -12,11 +12,17 @@ public class Game {
 
 	private LottoRepository lottoRepository = new LottoRepository();
 	private WinningLotto winningLotto;
+	private LottoResult lottoResult = new LottoResult();
 
 	public void run() {
-		makeLottos(InputView.inputPrice());
-		OutputView.showBuyingResult(lottoRepository.getLottos());
-		winningLotto = new WinningLotto(InputView.inputWinningLotto(), InputView.inputBonusNumber());
+		Price price = InputView.inputPrice();
+		makeLottos(price);
+		OutputView.showBuyingResult(lottoRepository.toLottoList());
+		WinningLottoNumbers winningLottoNumbers = InputView.inputWinningLotto();
+		winningLotto = new WinningLotto(winningLottoNumbers, InputView.inputBonusNumber(winningLottoNumbers));
+		makeLottoResult();
+		OutputView.showWinningResult(lottoResult);
+		OutputView.showRatio(price, lottoResult);
 	}
 
 	private void makeLottos(Price price) {
@@ -30,7 +36,7 @@ public class Game {
 	private void addLottos() {
 		try {
 			lottoRepository.addLotto(new Lotto(makeLotto()));
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			addLottos();
 		}
 	}
@@ -55,5 +61,11 @@ public class Game {
 		Collections.shuffle(lottoNumber);
 
 		return lottoNumber;
+	}
+
+	private void makeLottoResult() {
+		for (Lotto userLotto : lottoRepository.toLottoList()) {
+			lottoResult.putRank(winningLotto.match(userLotto));
+		}
 	}
 }
