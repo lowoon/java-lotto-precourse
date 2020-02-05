@@ -36,6 +36,6 @@ public class WinningLotto {
 
     private boolean checkBonusNumber(Lotto userLotto) {
         return userLotto.toList().stream()
-            .anyMatch(number -> number == bonusNumber.toInteger());
+                .anyMatch(number -> number == bonusNumber.toInteger());
     }
 }

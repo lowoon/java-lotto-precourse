@@ -10,64 +10,64 @@ import view.InputView;
 import view.OutputView;
 
 public class Game {
-	private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
-	private LottoRepository lottoRepository = new LottoRepository();
-	private WinningLotto winningLotto;
-	private LottoResult lottoResult = new LottoResult();
+    private LottoRepository lottoRepository = new LottoRepository();
+    private WinningLotto winningLotto;
+    private LottoResult lottoResult = new LottoResult();
 
-	public void run() {
-		Price price = InputView.inputPrice();
-		makeLottos(price);
-		OutputView.showBuyingResult(lottoRepository.toLottoList());
-		WinningLottoNumbers winningLottoNumbers = InputView.inputWinningLotto();
-		winningLotto = new WinningLotto(winningLottoNumbers, InputView.inputBonusNumber(winningLottoNumbers));
-		makeLottoResult();
-		OutputView.showWinningResult(lottoResult);
-		OutputView.showRatio(price, lottoResult);
-	}
+    public void run() {
+        Price price = InputView.inputPrice();
+        makeLottos(price);
+        OutputView.showBuyingResult(lottoRepository.toLottoList());
+        WinningLottoNumbers winningLottoNumbers = InputView.inputWinningLotto();
+        winningLotto = new WinningLotto(winningLottoNumbers, InputView.inputBonusNumber(winningLottoNumbers));
+        makeLottoResult();
+        OutputView.showWinningResult(lottoResult);
+        OutputView.showRatio(price, lottoResult);
+    }
 
-	private void makeLottos(Price price) {
-		int number = price.toInteger() / LOTTO_PRICE;
+    private void makeLottos(Price price) {
+        int number = price.toInteger() / LOTTO_PRICE;
 
-		for (int i = 0; i < number; i++) {
-			addLottos();
-		}
-	}
+        for (int i = 0; i < number; i++) {
+            addLottos();
+        }
+    }
 
-	private void addLottos() {
-		try {
-			lottoRepository.addLotto(new Lotto(makeLotto()));
-		} catch (IllegalArgumentException e) {
-			addLottos();
-		}
-	}
+    private void addLottos() {
+        try {
+            lottoRepository.addLotto(new Lotto(makeLotto()));
+        } catch (IllegalArgumentException e) {
+            addLottos();
+        }
+    }
 
-	private Set<Integer> makeLotto() {
-		Set<Integer> lotto = new HashSet<Integer>();
-		List<Integer> lottoNumber = makeLottoNumber();
+    private Set<Integer> makeLotto() {
+        Set<Integer> lotto = new HashSet<Integer>();
+        List<Integer> lottoNumber = makeLottoNumber();
 
-		for (int i = 0; i < 6; i++) {
-			lotto.add(lottoNumber.get(i));
-		}
+        for (int i = 0; i < 6; i++) {
+            lotto.add(lottoNumber.get(i));
+        }
 
-		return lotto;
-	}
+        return lotto;
+    }
 
-	private List<Integer> makeLottoNumber() {
-		List<Integer> lottoNumber = new ArrayList<Integer>();
+    private List<Integer> makeLottoNumber() {
+        List<Integer> lottoNumber = new ArrayList<Integer>();
 
-		for (int i = 1; i < 46; i++) {
-			lottoNumber.add(i);
-		}
-		Collections.shuffle(lottoNumber);
+        for (int i = 1; i < 46; i++) {
+            lottoNumber.add(i);
+        }
+        Collections.shuffle(lottoNumber);
 
-		return lottoNumber;
-	}
+        return lottoNumber;
+    }
 
-	private void makeLottoResult() {
-		for (Lotto userLotto : lottoRepository.toLottoList()) {
-			lottoResult.putRank(winningLotto.match(userLotto));
-		}
-	}
+    private void makeLottoResult() {
+        for (Lotto userLotto : lottoRepository.toLottoList()) {
+            lottoResult.putRank(winningLotto.match(userLotto));
+        }
+    }
 }
